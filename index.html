@@ -1,0 +1,2332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desarrollo Cognitivo y Psicosocial | Digital Interactivo</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Variables de colores y estilos */
+    :root {
+      --primary: #006847;
+      --secondary: #CE1126;
+      --accent: #FCBF49;
+      --light: #F5F5F5;
+      --dark: #333333;
+      --transition: all 0.3s ease;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --radius: 8px;
+      --piaget-color: #9b59b6; /* Nuevo color para Piaget */
+    }
+    /* Estilos generales */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: var(--dark);
+      background-color: var(--light);
+      overflow-x: hidden;
+    }
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    /* Header y navegación */
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, #00432a 100%);
+      color: white;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+    }
+    .logo i {
+      margin-right: 10px;
+      color: var(--accent);
+    }
+    .nav-menu {
+      display: flex;
+      list-style: none;
+    }
+    .nav-item {
+      margin-left: 1.5rem;
+    }
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      padding: 0.5rem 0;
+      position: relative;
+    }
+    .nav-link:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--accent);
+      transition: var(--transition);
+    }
+    .nav-link:hover:after {
+      width: 100%;
+    }
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+    }
+    /* Hero Section with Slider */
+    .hero {
+      height: 70vh;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+    }
+    .slider {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 300%;
+      height: 100%;
+      display: flex;
+      transition: transform 1s ease-in-out;
+    }
+    .slide {
+      width: 100vw;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    .slide:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      padding: 2rem;
+    }
+    .hero-title {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    .hero-subtitle {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .pagination {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 1;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .dot.active {
+      background: white;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--dark);
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+      border: 2px solid transparent;
+    }
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      background: #FFD166;
+    }
+    .btn.btn-secondary {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: white;
+    }
+    .btn.btn-secondary:hover {
+      background: var(--accent);
+      color: var(--dark);
+    }
+    /* Secciones */
+    .section {
+      padding: 5rem 0;
+    }
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      color: var(--primary);
+      position: relative;
+      padding-bottom: 1rem;
+    }
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: var(--secondary);
+      border-radius: 2px;
+    }
+    /* -- INICIO DE ESTILOS PARA TARJETAS CON GIRO -- */
+    .institutions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .institution-card {
+      background-color: transparent;
+      height: 450px; /* Altura fija para la tarjeta */
+      perspective: 1000px; /* Perspectiva para el efecto 3D */
+      transition: transform 0.3s ease;
+    }
+    .institution-card:hover {
+      transform: scale(1.05); /* Efecto de zoom al pasar el cursor */
+    }
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+    .institution-card.is-flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .card-front {
+      background: white;
+    }
+    .card-back {
+      background: white;
+      transform: rotateY(180deg);
+      padding: 1.5rem;
+      overflow-y: auto; /* Scroll si el contenido es largo */
+    }
+    .card-back h4 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+    .card-back p {
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    .card-back ul {
+      list-style-type: '  ✔  ';
+      padding-left: 1.2rem;
+      font-size: 0.9rem;
+    }
+    .card-back ul li {
+      margin-bottom: 0.5rem;
+      padding-left: 0.5rem;
+    }
+    .btn-back {
+      margin-top: auto; /* Empuja el botón al final */
+      padding: 0.5rem 1rem;
+      border: none;
+      background-color: var(--secondary);
+      color: white;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 600;
+    }
+    .btn-back:hover {
+      background-color: #a50c1e;
+    }
+    .card-img {
+      height: 180px;
+      overflow: hidden;
+    }
+    .card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+    .card-content {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1; /* Permite que el contenido crezca */
+    }
+    .card-title {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+      color: var(--primary);
+    }
+    .card-text {
+      margin-bottom: 1.5rem;
+      color: #666;
+      flex-grow: 1;
+    }
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      color: var(--secondary);
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+      cursor: pointer;
+      margin-top: auto; /* Empuja el enlace al final */
+    }
+    .card-link i {
+      margin-left: 5px;
+      transition: var(--transition);
+    }
+    .card-link:hover {
+      color: #a50c1e;
+    }
+    .card-link:hover i {
+      transform: translateX(5px);
+    }
+    /* -- FIN DE ESTILOS PARA TARJETAS CON GIRO -- */
+    /* Acordeón de niveles educativos */
+    .levels-accordion {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .accordion-item {
+      margin-bottom: 1rem;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .accordion-header {
+      background: white;
+      padding: 1.25rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: var(--transition);
+    }
+    .accordion-header:hover {
+      background: #e0e0e0;
+    }
+    .accordion-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+    .accordion-icon {
+      transition: var(--transition);
+    }
+    .accordion-content {
+      background: white;
+      padding: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .accordion-content-inner {
+      padding: 1.25rem;
+      border-top: 1px solid #eee;
+    }
+    .accordion-content-inner ul {
+      list-style: none;
+      padding: 0;
+    }
+    .accordion-content-inner ul li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    .accordion-content-inner ul li i {
+      color: var(--primary);
+      margin-right: 10px;
+      width: 20px;
+      text-align: center;
+    }
+    .accordion-item.active .accordion-icon {
+      transform: rotate(180deg);
+    }
+    .accordion-item.active .accordion-content {
+      max-height: 500px;
+    }
+    /* ESTILOS PARA LA SECCIÓN DE REFORMAS EDUCATIVAS */
+    .reforms-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .reform-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .reform-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    }
+    .reform-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1.5rem;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+    .heartbeat {
+      animation: heartbeat 1.5s ease-in-out infinite;
+    }
+    .reform-card h3 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+    .reform-card p {
+      color: #666;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .reform-details {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      margin-top: 1rem;
+      text-align: left;
+    }
+    .reform-card.active .reform-details {
+      max-height: 300px; /* Ajusta según el contenido */
+    }
+    /* Menú circular de interacciones */
+    .interactions-section {
+      text-align: center;
+      position: relative;
+      padding: 4rem 0;
+    }
+    .circular-menu {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      margin: 0 auto;
+      perspective: 1000px;
+    }
+    .menu-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 100;
+      transition: var(--transition);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      animation: heartbeat 2s infinite;
+    }
+    .menu-button:hover {
+      background: #004d33;
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+    @keyframes heartbeat {
+      0% { transform: translate(-50%, -50%) scale(1); }
+      15% { transform: translate(-50%, -50%) scale(1.1); }
+      30% { transform: translate(-50%, -50%) scale(1); }
+      45% { transform: translate(-50%, -50%) scale(1.1); }
+      60% { transform: translate(-50%, -50%) scale(1); }
+      100% { transform: translate(-50%, -50%) scale(1); }
+    }
+    .menu-items {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      list-style: none;
+      transform: translate(-50%, -50%);
+    }
+    .menu-item {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      transition: var(--transition);
+      transform-origin: center;
+      opacity: 0;
+      visibility: hidden;
+    }
+    .menu-item a {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: var(--secondary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      text-decoration: none;
+      transition: var(--transition);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .menu-item a:hover {
+      background: #a50c1e;
+      transform: scale(1.1);
+    }
+    .menu-active .menu-item {
+      opacity: 1;
+      visibility: visible;
+    }
+    .menu-active .menu-item:nth-child(1) { transform: translate(0, -120px); }
+    .menu-active .menu-item:nth-child(2) { transform: translate(104px, -60px); }
+    .menu-active .menu-item:nth-child(3) { transform: translate(104px, 60px); }
+    .menu-active .menu-item:nth-child(4) { transform: translate(0, 120px); }
+    .menu-active .menu-item:nth-child(5) { transform: translate(-104px, 60px); }
+    .menu-active .menu-item:nth-child(6) { transform: translate(-104px, -60px); }
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 2000; /* Aumentado para estar sobre todo */
+      align-items: center;
+      justify-content: center;
+    }
+    .modal.active {
+      display: flex;
+    }
+    .modal-content {
+      background: white;
+      width: 90%;
+      max-width: 600px;
+      border-radius: var(--radius);
+      padding: 2rem;
+      position: relative;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #999;
+      transition: var(--transition);
+    }
+    .modal-close:hover {
+      color: var(--secondary);
+    }
+    .modal-title {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      padding-right: 2rem;
+    }
+    .modal-text {
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    .modal-img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      margin-bottom: 1.5rem;
+    }
+    /* -- INICIO DE ESTILOS PARA NUEVO MENÚ DE PROPUESTAS -- */
+    #propuestas {
+      position: relative;
+      height: 80vh;
+      overflow: hidden;
+      background: #ececec;
+      padding: 0;
+      text-align: center;
+    }
+    #propuestas .container {
+      position: relative;
+      z-index: 2;
+      padding-top: 5rem;
+    }
+    #propuestas .section-title {
+      transition: transform 0.8s ease;
+    }
+    #propuestas.menu-deployed .section-title {
+      transform: translateY(-15vh);
+    }
+    #propuestas .section-description {
+      position: absolute;
+      top: calc(50% + 160px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease 0.5s, visibility 0.5s ease 0.5s;
+      z-index: 2;
+    }
+    #propuestas .instruction-text {
+      text-align: center;
+      margin-top: 2rem;
+      z-index: 2;
+      position: relative;
+      transition: transform 0.8s ease;
+    }
+    #propuestas.menu-deployed .instruction-text {
+      transform: translateY(20vh);
+    }
+    #propuestas.menu-deployed .section-description {
+      opacity: 1;
+      visibility: visible;
+    }
+    #propuestas #Button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      font-size: 18px;
+      text-align: center;
+      line-height: 60px;
+      background: #e74c3c;
+      border-radius: 50%;
+      color: #ececec;
+      cursor: pointer;
+      z-index: 3;
+      animation: heartbeat 1.5s ease-in-out infinite;
+    }
+    #propuestas .Nav {
+      position: absolute;
+      margin: auto;
+      top: 0; right: 0; bottom: 0; left: 0;
+      width: 302px;
+      height: 302px;
+      font-size: 0;
+      transform: scale(0);
+      transition: transform 0.8s;
+      z-index: 2;
+    }
+    #propuestas .Nav.active {
+      transform: scale(1);
+    }
+    #propuestas .Nav a {
+      display: inline-block;
+      width: 150px;
+      height: 150px;
+      font-size: 28px;
+      text-decoration: none;
+      line-height: 150px;
+      text-align: center;
+      color: #fff;
+      animation: spinIn 0.8s ease;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    #propuestas .Nav a:hover {
+      transform: scale(1.1);
+    }
+    #propuestas .Nav a:nth-of-type(odd) { margin-right: 2px; }
+    #propuestas .Nav a:nth-child(1) { margin-bottom: 2px; background: #1abc9c; }
+    #propuestas .Nav a:nth-child(2) { background: #2ecc71; }
+    #propuestas .Nav a:nth-child(3) { background: #3498db; }
+    #propuestas .Nav a:nth-child(4) { background: #9b59b6; }
+    @keyframes spinIn {
+      0% { transform: rotate(-360deg) scale(0); opacity: 0; }
+      100% { transform: rotate(0deg) scale(1); opacity: 1; }
+    }
+    #propuestas canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    /* -- FIN DE ESTILOS PARA NUEVO MENÚ DE PROPUESTAS -- */
+    /* -- INICIO DE ESTILOS PARA LÍNEA DE TIEMPO -- */
+    #linea-tiempo {
+      background: #f9f9f9;
+    }
+    .timeline-slider-container {
+      position: relative;
+      width: 100%;
+      padding: 0 50px; /* Espacio para los botones */
+    }
+    .timeline-slider {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE 10+ */
+      scroll-behavior: smooth;
+    }
+    .timeline-slider::-webkit-scrollbar {
+      display: none; /* Safari and Chrome */
+    }
+    .timeline-item {
+      flex: 0 0 100%;
+      scroll-snap-align: center;
+      padding: 1rem;
+      box-sizing: border-box;
+      transition: transform 0.3s ease;
+    }
+    .timeline-item:hover {
+      transform: scale(1.02); /* Efecto de zoom */
+    }
+    .timeline-card {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      position: relative;
+      border-left: 5px solid var(--primary);
+      animation: fadeIn 0.5s ease-out;
+    }
+    /* Nuevo estilo para tarjetas de Piaget */
+    .timeline-card.piaget-card {
+      border-left: 5px solid var(--piaget-color);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .timeline-year {
+      position: absolute;
+      top: -20px;
+      left: 2rem;
+      background: var(--secondary);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-weight: 700;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .timeline-title {
+      color: var(--primary);
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .timeline-content ul {
+      list-style-type: ' ✔  ';
+      padding-left: 1.2rem;
+    }
+    .timeline-content ul li {
+      margin-bottom: 0.5rem;
+      padding-left: 0.5rem;
+    }
+    .timeline-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      z-index: 10;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+    }
+    .timeline-nav:hover {
+      background: #004d33;
+      transform: translateY(-50%) scale(1.1);
+    }
+    .timeline-nav.prev {
+      left: 0;
+    }
+    .timeline-nav.next {
+      right: 0;
+    }
+    @media (min-width: 768px) {
+      .timeline-item {
+        flex-basis: 50%;
+      }
+    }
+    @media (min-width: 1024px) {
+      .timeline-item {
+        flex-basis: 33.33%;
+      }
+    }
+    /* -- FIN DE ESTILOS PARA LÍNEA DE TIEMPO -- */
+    /* Fuentes y créditos */
+    .sources-section {
+      background: #ececec;
+      padding: 4rem 0;
+    }
+    .sources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .source-item {
+      background: white;
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .source-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+    .source-details {
+      color: #666;
+      font-size: 0.9rem;
+      word-break: break-all;
+    }
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 3rem 0 1.5rem;
+    }
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .footer-logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+    }
+    .footer-logo i {
+      margin-right: 10px;
+      color: var(--accent);
+    }
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .social-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      color: white;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .social-icon:hover {
+      background: var(--accent);
+      color: var(--dark);
+      transform: translateY(-3px);
+    }
+    .footer-contact h3, .footer-comments h3 {
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+    .footer-contact h3:after, .footer-comments h3:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: var(--accent);
+    }
+    .footer-contact-info p {
+      margin-bottom: 0.75rem;
+      color: #ccc;
+      display: flex;
+      align-items: center;
+    }
+    .footer-contact-info i {
+      margin-right: 10px;
+      color: var(--accent);
+      width: 20px;
+      text-align: center;
+    }
+    .comment-form {
+      display: flex;
+      flex-direction: column;
+      margin-top: 1rem;
+    }
+    .comment-input {
+      flex: 1;
+      padding: 0.75rem;
+      border: none;
+      border-radius: var(--radius);
+      margin-bottom: 0.5rem;
+      resize: vertical;
+    }
+    .comment-btn {
+      background: var(--accent);
+      color: var(--dark);
+      border: none;
+      padding: 0.75rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .comment-btn:hover {
+      background: #FFD166;
+    }
+    .comments-display-area {
+      margin-top: 1.5rem;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    .comment-item {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 0.75rem;
+      border-radius: var(--radius);
+      margin-bottom: 0.5rem;
+      color: #ccc;
+      font-size: 0.9rem;
+      word-wrap: break-word;
+    }
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid #444;
+      font-size: 0.9rem;
+      color: #999;
+    }
+    /* Responsive */
+    @media (max-width: 992px) {
+      .hero-title { font-size: 2.5rem; }
+      .hero-subtitle { font-size: 1.25rem; }
+    }
+    @media (max-width: 768px) {
+      .hamburger { display: block; }
+      .nav-menu {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        flex-direction: column;
+        background: var(--primary);
+        width: 80%;
+        height: calc(100vh - 70px);
+        transition: var(--transition);
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+      }
+      .nav-menu.active { right: 0; }
+      .nav-item { margin: 1rem 0; } /* Espaciado reducido */
+      .hero-title { font-size: 2rem; }
+      .hero-subtitle { font-size: 1.1rem; }
+      .circular-menu { width: 250px; height: 250px; }
+      .menu-active .menu-item:nth-child(1) { transform: translate(0, -100px); }
+      .menu-active .menu-item:nth-child(2) { transform: translate(87px, -50px); }
+      .menu-active .menu-item:nth-child(3) { transform: translate(87px, 50px); }
+      .menu-active .menu-item:nth-child(4) { transform: translate(0, 100px); }
+      .menu-active .menu-item:nth-child(5) { transform: translate(-87px, 50px); }
+      .menu-active .menu-item:nth-child(6) { transform: translate(-87px, -50px); }
+      .reforms-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+      }
+      .reform-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 1.7rem;
+      }
+    }
+    @media (max-width: 576px) {
+      .hero { height: 60vh; }
+      .hero-title { font-size: 1.75rem; }
+      .section { padding: 3rem 0; }
+      .circular-menu { width: 200px; height: 200px; }
+      .menu-button { width: 60px; height: 60px; font-size: 20px; }
+      .menu-item a { width: 50px; height: 50px; font-size: 18px; }
+      .menu-active .menu-item:nth-child(1) { transform: translate(0, -80px); }
+      .menu-active .menu-item:nth-child(2) { transform: translate(69px, -40px); }
+      .menu-active .menu-item:nth-child(3) { transform: translate(69px, 40px); }
+      .menu-active .menu-item:nth-child(4) { transform: translate(0, 80px); }
+      .menu-active .menu-item:nth-child(5) { transform: translate(-69px, 40px); }
+      .menu-active .menu-item:nth-child(6) { transform: translate(-69px, -40px); }
+      .reforms-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    /* Estilos originales para modales y tarjetas de fuentes */
+    #sepModal .modal-content,
+    #estatalesModal .modal-content,
+    #publicasModal .modal-content,
+    #privadasModal .modal-content,
+    #conacytModal .modal-content,
+    #universidadesModal .modal-content {
+      border-left: 5px solid var(--primary);
+    }
+    #formacionModal .modal-content {
+      border-left: 5px solid #1abc9c;
+    }
+    #tecnologiaModal .modal-content {
+      border-left: 5px solid #2ecc71;
+    }
+    #equidadModal .modal-content {
+      border-left: 5px solid #3498db;
+    }
+    #vinculacionModal .modal-content {
+      border-left: 5px solid #9b59b6;
+    }
+    .source-item:hover {
+      transform: scale(1.05) rotate(1deg);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+    /* NUEVOS ESTILOS PARA SECCIÓN DE AUTORES */
+    .authors-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .author-card {
+      background: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+    .author-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+    .author-image {
+      height: 250px;
+      overflow: hidden;
+    }
+    .author-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .author-card:hover .author-image img {
+      transform: scale(1.05);
+    }
+    .author-info {
+      padding: 1.5rem;
+    }
+    .author-name {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    /* == INICIO DE ESTILOS CORREGIDOS PARA SLIDER DE ERICKSON == */
+    .erikson-stages {
+      margin: 3rem auto;
+      position: relative;
+      padding: 0;
+    }
+    .erikson-slider {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      scroll-behavior: smooth;
+      /* Padding a los lados para permitir que la primera/última tarjeta se centren */
+      padding-left: calc(50% - 150px);
+      padding-right: calc(50% - 150px);
+    }
+    .erikson-slider::-webkit-scrollbar {
+      display: none;
+    }
+    .erikson-stage {
+      flex: 0 0 300px;
+      scroll-snap-align: center;
+      margin: 0 15px;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+      opacity: 0.6; /* Hacemos las no activas un poco transparentes */
+    }
+    .erikson-stage.active {
+      transform: scale(1.15);
+      z-index: 10;
+      opacity: 1;
+    }
+    .stage-card {
+      background: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .stage-image {
+      height: 180px;
+      overflow: hidden;
+    }
+    .stage-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .stage-content {
+      padding: 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .stage-title {
+      font-size: 1.2rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    .stage-age {
+      font-size: 0.9rem;
+      color: var(--secondary);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    .stage-description {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+    .stage-number {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 30px;
+      margin-right: 10px;
+    }
+    .erikson-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      z-index: 10;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+    }
+    .erikson-nav:hover {
+      background: #004d33;
+      transform: translateY(-50%) scale(1.1);
+    }
+    .erikson-nav.prev {
+      left: 10px;
+    }
+    .erikson-nav.next {
+      right: 10px;
+    }
+    /* == FIN DE ESTILOS CORREGIDOS PARA SLIDER DE ERICKSON == */
+
+    /* Estilos para el nuevo Modal de Portada */
+    .modal-portada {
+      background: linear-gradient(145deg, #ffffff, #f0f0f0);
+      border-radius: 10px;
+      padding: 0;
+      text-align: center;
+      max-width: 700px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      border-top: 10px solid;
+      border-bottom: 10px solid;
+      border-image-slice: 1;
+      border-image-source: linear-gradient(to left, var(--primary), var(--accent), var(--secondary));
+      overflow: hidden;
+    }
+    .portada-header {
+      padding: 1rem;
+      background-color: rgba(0, 104, 71, 0.1);
+    }
+    .portada-title {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--primary);
+      text-transform: uppercase;
+      margin: 2rem 1rem;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+    .portada-author, .portada-docente {
+      font-size: 1.2rem;
+      color: var(--dark);
+      margin: 1rem 1.5rem;
+    }
+    .portada-author strong, .portada-docente strong {
+      color: var(--secondary);
+      font-weight: 700;
+    }
+    .portada-footer {
+      background-color: rgba(0, 104, 71, 0.1);
+      padding: 1.5rem;
+      margin-top: 2.5rem;
+      color: #555;
+      font-size: 1rem;
+      display: flex;
+      justify-content: space-around;
+      font-weight: 500;
+    }
+    @media (max-width: 768px) {
+      .authors-container {
+        grid-template-columns: 1fr;
+      }
+      .erikson-stage {
+        flex: 0 0 250px;
+      }
+      .erikson-slider {
+        padding-left: calc(50% - 125px);
+        padding-right: calc(50% - 125px);
+      }
+      .portada-title {
+        font-size: 1.5rem;
+      }
+      .portada-author, .portada-docente {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-content">
+      <div class="logo">
+        <i class="fas fa-graduation-cap"></i>
+        <span>Piaget y Erikson | Virtual</span>
+      </div>
+      <button class="hamburger" id="hamburger">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-menu" id="navMenu">
+        <li class="nav-item"><a href="#instituciones" class="nav-link">Introducción</a></li>
+        <li class="nav-item"><a href="#niveles" class="nav-link">Autores</a></li>
+        <li class="nav-item"><a href="#reformas" class="nav-link">Piaget</a></li>
+        <li class="nav-item"><a href="#interacciones" class="nav-link">Erikson</a></li>
+        <li class="nav-item"><a href="#linea-tiempo" class="nav-link">Aplicación</a></li>
+        <li class="nav-item"><a href="#propuestas" class="nav-link">Conclusión</a></li>
+        <li class="nav-item"><a href="#fuentes" class="nav-link">Fuentes</a></li>
+      </ul>
+    </div>
+  </header>
+  <section class="hero">
+    <div class="slider" id="slider">
+      <div class="slide" style="background-image: url('img/jpeaget.jpg');"></div>
+      <div class="slide" style="background-image: url('img/jean_t.jpg');"></div>
+      <div class="slide" style="background-image: url('img/ee.jpg');"></div>
+    </div>
+    <div class="hero-content">
+      <h1 class="hero-title">Desarrollo Cognitivo y Psicosocial</h1>
+      <p class="hero-subtitle">Un análisis de las teorías de Jean Piaget y Erik Erikson a lo largo del ciclo vital
+      </p>
+      <div class="hero-buttons">
+        <a href="#instituciones" class="btn">Comenzar Exploración</a>
+        <a href="#" id="openPortadaModal" class="btn btn-secondary">Portada</a>
+      </div>
+    </div>
+    <div class="pagination" id="pagination">
+      <div class="dot active"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </section>
+  <section id="instituciones" class="section">
+    <div class="container">
+      <h2 class="section-title"> 🗞 ️ Introducción</h2>
+      <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem;">El estudio del desarrollo humano es una fascinante exploración de los procesos de cambio y estabilidad que experimentamos desde el nacimiento hasta la vejez.
+      Comprender cómo pensamos, sentimos y nos relacionamos en cada etapa de la vida es crucial para disciplinas como la psicología, la educación y la sociología.</p>
+      <div class="institutions-grid">
+        <div class="institution-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="card-img"><img src="img_sep/psico.jpg" alt="SEP"></div>
+              <div class="card-content">
+                <h3 class="card-title"> 🎯  Objeto de estudio</h3>
+                <p class="card-text">Este trabajo se centra en el análisis de dos pilares fundamentales de la psicología del desarrollo: Jean Piaget y Erik Erikson.</p>
+                <a class="card-link">+ INFO <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+            <div class="card-back">
+              <h4>Relación de las teorías</h4>
+              <p>Aunque contemporáneos, sus enfoques fueron complementarios; Piaget se dedicó a develar los misterios del desarrollo cognitivo (cómo pensamos y comprendemos el mundo), mientras que Erikson se concentró en el desarrollo psicosocial (cómo nos formamos una identidad y nos relacionamos con la sociedad).
+              El objetivo de esta investigación es desglosar y comparar las contribuciones de ambos teóricos en</p>
+              <h4> tres etapas clave:</h4>
+              <ul>
+                <li>La infancia.</li>
+                <li>La adolescencia</li>
+                <li>Y la adultez.</li>
+              </ul>
+              <button class="btn-back">Regresar  ↩ ️</button>
+            </div>
+          </div>
+        </div>
+        <div class="institution-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="card-img"><img src="img_sep/cogni.jpg" alt="Autoridades Estatales"></div>
+              <div class="card-content">
+                <h3 class="card-title"> 📜  Conceptos Centrales</h3>
+                <p class="card-text">Estas teorías permiten moldear de manera profunda la travesía única de cada individuo a lo largo de su vida.</p>
+                <a class="card-link">+ INFO <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+            <div class="card-back">
+              <h4> 🕵 ️ ¿Qué se analiza?</h4>
+              <p>Se examinarán los conceptos centrales de cada autor, proporcionando ejemplos concretos que ilustren sus teorías en acción.</p>
+              <h4>Se busca ofrecer</h4>
+              <ul>
+                <li>Una visión integrada.</li>
+                <li>Demostrar cómo el desarrollo cognitivo y</li>
+                <li>Psicosocial están entrelazados de manera profunda.</li>
+              </ul>
+              <button class="btn-back">Regresar  ↩ ️</button>
+            </div>
+          </div>
+        </div>
+        <div class="institution-card">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="card-img"><img src="img/p_g.jpg" alt="Universidades"></div>
+              <div class="card-content">
+                <h3 class="card-title"> 🕵 ️ Descubramos juntos</h3>
+                <p class="card-text">Esta investigación te permitirá explorar los aportes específicos de cada autor, destacando ejemplos enfocados en la práctica y hallazgos.
+                  <b>¡¡Acompáñame a dar el recorrido  😉 !!</b></p>
+                  <a class="card-link"></a>
+                </div>
+              </div>
+              <div class="card-back">
+                <h4>Universidades y Centros de Educación Superior</h4>
+                <p>Incluye universidades públicas autónomas (UNAM, IPN, UAM, universidades estatales), tecnológicos (TecNM), e instituciones privadas.
+                Tienen autonomía académica y administrativa, ofrecen licenciaturas, ingenierías y posgrado.</p>
+                <h4>Roles</h4>
+                <ul>
+                  <li>Formación profesional y técnica.</li>
+                  <li>Investigación y vinculación con el sector productivo.</li>
+                  <li>Extensión y formación permanente.</li>
+                </ul>
+                <button class="btn-back">Regresar  ↩ ️</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="niveles" class="section" style="background: #f9f9f9;">
+      <div class="container">
+        <h2 class="section-title"> 📖  Autores</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem;">A continuación te invito a conocer a los autores de las diferentes teorías.</p>
+        <div class="authors-container">
+          <div class="author-column">
+            <div class="author-card">
+              <div class="author-image">
+                <img src="img/jean.jpg" alt="Jean Piaget">
+              </div>
+              <div class="author-info">
+                <h3 class="author-name"> 📘  Jean Piaget</h3>
+                <div class="accordion-item">
+                  <div class="accordion-header">
+                    <h3 class="accordion-title">Teoría del Desarrollo Cognitivo</h3>
+                    <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                  </div>
+                  <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                      <p>Psicólogo suizo conocido por sus aportes al estudio del desarrollo infantil y la teoría constructivista del desarrollo de la inteligencia.
+                      Fundó la:</p><br>
+                      <ul>
+                        <li><i class="fas fa-shapes"></i><b>Teoría del Desarrollo Cognitivo</b></li>
+                      </ul>
+                      <p>Piaget propuso que los niños pasan por cuatro etapas de desarrollo cognitivo, cada una caracterizada por formas diferentes de pensar y entender el mundo.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="author-column">
+            <div class="author-card">
+              <div class="author-image">
+                <img src="img/erickson.jpg" alt="Erik Erikson">
+              </div>
+              <div class="author-info">
+                <h3 class="author-name"> 📕  Erik Erikson</h3>
+                <div class="accordion-item">
+                  <div class="accordion-header">
+                    <h3 class="accordion-title">Teoría del Desarrollo Psicosocial</h3>
+                    <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                  </div>
+                  <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                      <p>Psicoanalista estadounidense de origen alemán, destacado por su teoría del desarrollo psicosocial y el concepto de crisis de identidad.</p><br>
+                      <ul>
+                        <li><i class="fas fa-cogs"></i><b>Teoría del Desarrollo Psicosocial</b></li>
+                      </ul>
+                      <p>Erikson propuso ocho etapas de desarrollo psicosocial que abarcan todo el ciclo vital, cada una presentando un conflicto específico que debe resolverse.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="reformas" class="section">
+      <div class="container">
+        <h2 class="section-title"> 👱  Piaget</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem;">
+          Para enriquecer el análisis, se incorpora información detallada de las etapas propuestas por ambos autores: las 4 etapas de Piaget y las 8 etapas de Erikson con sus respectivas definiciones, integradas en las etapas vitales correspondientes (infancia, adolescencia y adultez).
+        </p>
+        <div class="reforms-grid">
+          <div class="reform-card">
+            <div class="reform-icon heartbeat">
+              <i class="fas fa-project-diagram"></i>
+            </div>
+            <h3>Piaget - Desarrollo en la infancia</h3>
+            <p>Sensoriomotora (0-2 años)</p>
+            <div class="reform-details"><hr>
+              <p> 📌  Esta etapa, que va desde el nacimiento hasta aproximadamente los dos años, se caracteriza por la forma en que los bebés aprenden sobre el mundo a través de sus sentidos y sus acciones motoras.</p>
+            </div>
+          </div>
+          <div class="reform-card">
+            <div class="reform-icon heartbeat">
+              <i class="fas fa-globe-americas"></i>
+            </div>
+            <h3>Piaget - Desarrollo en la infancia</h3>
+            <p>Preoperacional (2-7 años)</p>
+            <div class="reform-details"><hr>
+              <p> 📌  Es la segunda fase del desarrollo cognitivo, caracterizada por el desarrollo del lenguaje, la capacidad de pensar simbólicamente y la imaginación.</p>
+              <p> 📌  Durante esta etapa, los niños usan símbolos para representar ideas y se involucran en juegos de simulación, aunque su pensamiento es egocéntrico y carecen de operaciones mentales complejas o la capacidad de conservar la lógica.</p>
+            </div>
+          </div>
+          <div class="reform-card">
+            <div class="reform-icon heartbeat">
+              <i class="fas fa-hands-helping"></i>
+            </div>
+            <h3>Piaget - Desarrollo en la infancia</h3>
+            <p>Operacional Concretas (7-11 años)</p>
+            <div class="reform-details"><hr>
+              <p> 📌  Se caracteriza porque los niños pueden usar el pensamiento lógico para resolver problemas que son físicos o concretos, pero no abstractos.</p>
+              <p> 📌  En esta fase, los niños desarrollan la capacidad de comprender conceptos como la conservación (que una sustancia sigue siendo la misma a pesar de cambios en su forma) y la descentralización (la capacidad de ver las cosas desde múltiples perspectivas), lo que les permite organizar y clasificar objetos de manera más compleja.</p>
+            </div>
+          </div>
+          <div class="reform-card">
+            <div class="reform-icon heartbeat">
+              <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+            <h3>Piaget - Adolescencia</h3>
+            <p>Operaciones formales (12+)</p>
+            <div class="reform-details"><hr>
+              <p> 📌  En esta fase, las personas desarrollan la capacidad de pensar de forma abstracta, lógica e hipotética, lo que les permite resolver problemas complejos, razonar sobre conceptos como la justicia o la libertad, y aplicar el pensamiento científico al formular hipótesis y probarlas sistemáticamente.</p>
+              <p> 📌  Por ejemplo: Un adolescente en esta etapa puede determinar sistemáticamente qué factor (longitud, peso) afecta la velocidad de oscilación de un péndulo.
+              </p>
+              <p> 📌  Se aplica el verdadero pensamiento científico, formulando y probando hipótesis para comprender la complejidad del mundo.</p>
+            </div>
+          </div>
+          <div class="reform-card">
+            <div class="reform-icon heartbeat">
+              <i class="fas fa-users"></i>
+            </div>
+            <h3>Piaget - Adultez</h3>
+            <p>Adultez</p>
+            <div class="reform-details"><hr>
+              <p> 📌  Esta etapa se caracteriza por el desarrollo del pensamiento abstracto y lógico, el razonamiento hipotético-deductivo y la capacidad de "pensar sobre el pensamiento" (metacognición), permitiendo al individuo analizar y manipular sus propios esquemas mentales para resolver problemas complejos.</p>
+              <p> 📌  Aunque Piaget consideró el pensamiento formal como el pináculo del logro cognitivo, algunos enfoques neopiagetianos y teorías posteriores sugieren que el desarrollo cognitivo continúa en la adultez con el pensamiento posformal, que integra lógica, emoción y experiencia para resolver problemas ambiguos.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="interacciones" class="section">
+      <div class="container">
+        <h2 class="section-title"> 🧔  Erick Erikson</h2>
+        <p style="text-align:center; max-width: 800px; margin: 0 auto 2rem;">Explora las 8 etapas de la teoría del desarrollo psicosocial de Erikson.
+        Desliza para ver cada etapa.</p>
+        <div class="erikson-stages">
+          <button class="erikson-nav prev"><i class="fas fa-chevron-left"></i></button>
+          <div class="erikson-slider">
+            <div class="erikson-stage">
+              <div class="stage-card">
+                <div class="stage-image">
+                  <img src="img/confianza.jpg" alt="Confianza vs. Desconfianza">
+                </div>
+                <div class="stage-content">
+                  <h3 class="stage-title"><span class="stage-number">1</span>Confianza vs. Desconfianza</h3>
+                  <p class="stage-age">0-1 año</p>
+                  <p class="stage-description">El bebé desarrolla un sentido de confianza cuando sus necesidades son satisfechas de manera consistente y cariñosa.</p>
+                </div>
+              </div>
+            </div>
+            <div class="erikson-stage">
+              <div class="stage-card">
+                <div class="stage-image">
+                  <img src="img/verguenza.jpg" alt="Autonomía vs. Vergüenza y Duda">
+                </div>
+                <div class="stage-content">
+                  <h3 class="stage-title"><span class="stage-number">2</span>Autonomía vs. Vergüenza y Duda</h3>
+                  <p class="stage-age">1-3 años</p>
+                  <p class="stage-description">Los niños aprenden a controlar sus funciones corporales y a tomar decisiones, desarrollando autonomía.</p>
+                </div>
+              </div>
+            </div>
+            <div class="erikson-stage">
+              <div class="stage-card">
+                <div class="stage-image">
+                  <img src="img/culpa.jpg" alt="Iniciativa vs. Culpa">
+                </div>
+                <div class="stage-content">
+                  <h3 class="stage-title"><span class="stage-number">3</span>Iniciativa vs. Culpa</h3>
+                  <p class="stage-age">3-6 años</p>
+                  <p class="stage-description">Los niños comienzan a planificar actividades, hacer preguntas y asumir liderazgo en el juego.</p>
+                </div>
+              </div>
+            </div>
+            <div class="erikson-stage">
+              <div class="stage-card">
+                <div class="stage-image">
+                  <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Laboriosidad vs. Inferioridad">
+                </div>
+                <div class="stage-content">
+                  <h3 class="stage-title"><span class="stage-number">4</span>Laboriosidad vs. Inferioridad</h3>
+                  <p class="stage-age">6-12 años</p>
+                  <p class="stage-description">Los niños desarrollan sentido de competencia a través de la aplicación de habilidades y el cumplimiento de tareas.</p>
+                </div>
+              </div>
+            </div>
+            <div class="erikson-stage">
+              <div class="stage-card">
+                <div class="stage-image">
+                  <img src="img/identidad.jpg" alt="Identidad vs. Confusión de Roles">
+                </div>
+                <div class="stage-content">
+                  <h3 class="stage-title"><span class="stage-number">5</span>Identidad vs. Confusión de Roles</h3>
+                  <p class="stage-age">12-20 años</p>
+                  <p class="stage-description">Los adolescentes exploran su independencia y desarrollan un sentido de identidad personal.</p>
+                </div>
+              </div>
+            </div>
+            <div class="erikson-stage">
+              <div class="stage-card">
+                <div class="stage-image">
+                  <img src="img/aisla.jpg" alt="Intimidad vs. Aislamiento">
+                </div>
+                <div class="stage-content">
+                  <h3 class="stage-title"><span class="stage-number">6</span>Intimidad vs. Aislamiento</h3>
+                  <p class="stage-age">20-40 años</p>
+                  <p class="stage-description">Los adultos jóvenes forman relaciones íntimas y amorosas con otras personas.</p>
+                </div>
+              </div>
+            </div>
+            <div class="erikson-stage">
+              <div class="stage-card">
+                <div class="stage-image">
+                  <img src="img/estanca.jpg" alt="Generatividad vs. Estancamiento">
+                </div>
+                <div class="stage-content">
+                  <h3 class="stage-title"><span class="stage-number">7</span>Generatividad vs. Estancamiento</h3>
+                  <p class="stage-age">40-65 años</p>
+                  <p class="stage-description">Los adultos contribuyen a la siguiente generación a través del trabajo, la crianza de los hijos y actividades comunitarias.</p>
+                </div>
+              </div>
+            </div>
+            <div class="erikson-stage">
+              <div class="stage-card">
+                <div class="stage-image">
+                  <img src="img/integro.jpg" alt="Integridad vs. Desesperación">
+                </div>
+                <div class="stage-content">
+                  <h3 class="stage-title"><span class="stage-number">8</span>Integridad vs. Desesperación</h3>
+                  <p class="stage-age">65+ años</p>
+                  <p class="stage-description">Los adultos mayores reflexionan sobre su vida, sintiendo integridad al aceptar su trayectoria vital.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="erikson-nav next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </section>
+    <section id="linea-tiempo" class="section">
+      <div class="container">
+        <h2 class="section-title"> 📘  Aplicación de las teorías en el aula</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem;">
+          Pensando como un docente que quiere aplicar las teorías del desarrollo humano en sus clases (Infancia, Adolescencia, Adultez) para que no se quede solo como "teoría" sino que se vea en la práctica, recomiendo lo siguiente:
+        </p>
+        <div class="timeline-slider-container">
+          <button class="timeline-nav prev"><i class="fas fa-chevron-left"></i></button>
+          <div class="timeline-slider">
+            <div class="timeline-item">
+              <div class="timeline-card piaget-card">
+                <div class="timeline-year">Piaget</div>
+                <h4 class="timeline-title">Etapa de la Infancia - Desarrollo cognitivo</h4>
+                <div class="timeline-content">
+                  <ul>
+                    <li>Diseñar actividades concretas y manipulativas (rompecabezas, experimentos sencillos, juegos de roles).</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-card">
+                <div class="timeline-year">Erikson</div>
+                <h4 class="timeline-title">Etapa de la Infancia - Desarrollo psicosocial</h4>
+                <div class="timeline-content">
+                  <ul>
+                    <li>Motivar a que los alumnos tomen pequeñas decisiones (colores, materiales, roles en el juego).</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-card piaget-card">
+                <div class="timeline-year">Piaget</div>
+                <h4 class="timeline-title">Etapa de la Adolescencia - Pensamiento formal</h4>
+                <div class="timeline-content">
+                  <ul>
+                    <li>Problemas que impliquen hipótesis y razonamiento abstracto (experimentos de laboratorio, análisis de literatura, debates).</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-card">
+                <div class="timeline-year">Erikson</div>
+                <h4 class="timeline-title">Etapa de la Adolescencia - Identidad vs Confusión de roles</h4>
+                <div class="timeline-content">
+                  <ul>
+                    <li>Permitir debates y proyectos donde puedan expresar sus valores, gustos e identidad.</li>
+                    <li>Fomentar actividades artísticas, tecnológicas o deportivas que refuercen quiénes son.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-card piaget-card">
+                <div class="timeline-year">Piaget</div>
+                <h4 class="timeline-title">Etapa de la Adultez</h4>
+                <div class="timeline-content">
+                  <ul>
+                    <li>Proyectos prácticos vinculados con su vida profesional y personal.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-card">
+                <div class="timeline-year">Erikson</div>
+                <h4 class="timeline-title">Etapa de la Adultez -(intimidad vs aislamiento, generatividad</h4>
+                <div class="timeline-content">
+                  <ul>
+                    <li>Fomentar aprendizaje colaborativo, tutorías entre compañeros, y proyectos que aporten a la comunidad.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="timeline-nav next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </section>
+    <section id="propuestas" class="section">
+      <div class="container">
+        <h2 class="section-title"> 🧩  Conclusión</h2>
+      </div>
+      <div id="Button" class="fas fa-fire"></div>
+      <div class="Nav">
+        <a data-modal="formacion"><span class="fas fa-school infra-icon"></span></a>
+        <a data-modal="tecnologia"><span class="fas fa-laptop-code"></span></a>
+        <a data-modal="equidad"><span class="fas fa-balance-scale"></span></a>
+        <a data-modal="vinculacion"><span class="fa-solid fa-screwdriver-wrench"></span></a>
+      </div>
+      <p class="section-description">Las teorías de Piaget y Erikson ofrecen perspectivas complementarias sobre el desarrollo cognitivo.</p>
+      <p class="instruction-text">Haz clic en el botón para explorar.</p>
+      <canvas></canvas>
+      <audio id="explosionSound" src="https://www.soundjay.com/button/sounds/button-16.mp3" preload="auto"></audio>
+    </section>
+    <section id="fuentes" class="sources-section">
+      <div class="container">
+        <h2 class="section-title"> 📚  Fuentes de Referencia</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem;">Información basada en fuentes confiables y actualizadas sobre las teorías educativas.</p>
+        <div class="sources-grid">
+          <div class="source-item">
+            <h3 class="source-title">PsychologyWriting</h3>
+            <p class="source-details"><em>PsychologyWriting. (27 de diciembre de 2024). Comparación de las teorías de Piaget y Erickson.</em>
+              <a href="https://psychologywriting.com/the-piaget-vs-erickson-theories-comparison/" target="_blank" rel="noopener noreferrer">
+              https://psychologywriting.com/the-piaget-vs-erickson-theories-comparison/</p>
+            </a>
+          </div>
+          <div class="source-item">
+            <h3 class="source-title">Cherry, K.</h3>
+            <p class="source-details">
+              <em>Cherry, K. (2022). Etapas del desarrollo de Erikson. Verywell Mind.</em>
+              <a href="https://www.verywellmind.com/erik-eriksons-stages-of-psychosocial-development-2795740" target="_blank" rel="noopener noreferrer">
+                https://www.verywellmind.com/erik-eriksons-stages-of-psychosocial-development-2795740
+              </a>
+            </p>
+          </div>
+          <div class="source-item">
+            <h3 class="source-title">Erikson</h3>
+            <p class="source-details"><em>Erikson, EH. Infancia y sociedad. 2.ª ed. Nueva York: Norton; 1963.</em>
+              <a href="https://www.academia.edu/31099902/Erikson_Infancia_y_Sociedad_8_Edades_de_La_Vida" target="_blank" rel="noopener noreferrer">
+                https://www.academia.edu/31099902/Erikson_Infancia_y_Sociedad_8_Edades_de_La_Vida
+              </a>
+            </p>
+          </div>
+          <div class="source-item">
+            <h3 class="source-title">Babakr, et al</h3>
+            <p class="source-details"><em>Babakr, Z. H., Mohamedamin, P. S., & Kakamad, K. (2019, Agosto, 15). Piaget's cognitive developmental theory: A critical review.
+            Education Quarterly Reviews, 2(3), 517-524.</em>
+            <a href="https://www.asianinstituteofresearch.org/EQRarchives/piaget%E2%80%99s-cognitive-developmental-theory%3A-critical-review-" target="_blank" rel="noopener noreferrer">
+              https://www.asianinstituteofresearch.org/EQRarchives/piaget%E2%80%99s-cognitive-developmental-theory%3A-critical-review-
+            </a>
+          </p>
+        </div>
+        <div class="source-item">
+          <h3 class="source-title">McLeod, S</h3>
+          <p class="source-details"><em>McLeod, S. (2025, June 16). Piaget's formal operational stage: Definition & examples. Simply Psychology.</em>
+            <a href="https://www.simplypsychology.org/formal-operational.html" target="_blank" rel="noopener noreferrer">
+              https://www.simplypsychology.org/formal-operational.html
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <div class="footer-logo">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Piaget y Erikson</span>
+          </div>
+          <p>Documental digital interactivo sobre las teorías de Piaget y Erikson. Diseñado para facilitar la comprensión y su funcionamiento.</p>
+          <div class="footer-social">
+            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="footer-contact">
+          <h3>Contacto</h3>
+          <div class="footer-contact-info">
+            <p><i class="fas fa-user"></i>Autor: Ing. Héctor L. Pérez</p>
+            <p><i class="fas fa-envelope"></i>ue0204@unienigma.edu.mx</p>
+            <p><i class="fas fa-phone"></i>+52 (984) 211-9971</p>
+            <p><i class="fas fa-map-marker-alt"></i>Playa del Carmen, Q. Roo.</p>
+          </div>
+        </div>
+        <div class="footer-comments">
+          <h3>Comentarios</h3>
+          <p>Déjanos tu opinión.</p>
+          <form class="comment-form" id="commentForm">
+            <textarea id="commentInput" class="comment-input" placeholder="Escribe tu comentario aquí..." rows="3"></textarea>
+            <button type="submit" class="comment-btn">Comentar</button>
+          </form>
+          <div class="comments-display-area" id="commentsDisplay">
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Piaget y Erikson - Virtual Interactivo. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+  <div class="modal" id="portadaModal">
+    <div class="modal-content modal-portada">
+      <button class="modal-close">&times;</button>
+      <div class="portada-header"></div>
+      <h2 class="portada-title">EXPLORANDO EL DESARROLLO COGNITIVO: PIAGET Y ERIKSON</h2>
+      <p class="portada-author"><strong>Realizado por:</strong> Ing. Héctor L. P. Ramírez</p>
+      <p class="portada-docente"><strong>Docente:</strong> Dra. Eylin A. Perera</p>
+      <div class="portada-footer">
+        <p>Playa del Carmen, Q. Roo</p>
+        <p>Agosto 28, 2025</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="sepModal">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <h2 class="modal-title">Secretaría de Educación Pública (SEP)</h2>
+      <div class="modal-text">
+        <p>La SEP es la institución rectora del sistema educativo mexicano.
+        Sus principales funciones incluyen establecer políticas y programas educativos, coordinar la educación en todos sus niveles y administrar los recursos federales.</p>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="estatalesModal">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <h2 class="modal-title">Gobiernos Estatales</h2>
+      <div class="modal-text">
+        <p>Son responsables de la operación y administración de los servicios educativos en sus respectivas entidades, implementando políticas federales y gestionando escuelas y personal.</p>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="publicasModal">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <h2 class="modal-title">Escuelas Públicas</h2>
+      <div class="modal-text">
+        <p>Instituciones financiadas por el Estado que ofrecen educación gratuita y atienden a la mayor parte de la población estudiantil, siguiendo los planes de la SEP.</p>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="privadasModal">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <h2 class="modal-title">Escuelas Privadas</h2>
+      <div class="modal-text">
+        <p>Gestionadas por particulares con financiamiento privado. Deben cumplir con los planes oficiales de la SEP para obtener el Reconocimiento de Validez Oficial de Estudios (RVOE).</p>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="conacytModal">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <h2 class="modal-title">CONACyT</h2>
+      <div class="modal-text">
+        <p>El Consejo Nacional de Ciencia y Tecnología promueve la investigación científica y el desarrollo tecnológico, otorgando becas y financiando proyectos.</p>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="universidadesModal">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <h2 class="modal-title">Universidades</h2>
+      <div class="modal-text">
+        <p>Instituciones de educación superior, públicas o privadas, que imparten licenciaturas y posgrados, realizan investigación y difunden la cultura.</p>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="formacionModal">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <h2 class="modal-title"><i class="fas fa-school infra-icon"></i> Análisis Integrador</h2>
+      <div class="modal-text">
+        <p>El análisis de las teorías de Jean Piaget y Erik Erikson a lo largo de las tres etapas vitales revela una riqueza y complejidad extraordinarias en el proceso de desarrollo humano.
+          Lejos de ser excluyentes, sus perspectivas se entrelazan para ofrecer una visión holística.
+          La teoría de Piaget nos proporciona el "hardware" cognitivo: las estructuras mentales y las capacidades lógicas que nos permiten procesar información y comprender el mundo en cada fase.
+        Sigue  ↪ ️</p>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="tecnologiaModal">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <h2 class="modal-title"><i class="fas fa-laptop-code"></i> Análisis Integrador (Continuación)</h2>
+      <div class="modal-text">
+        <p> La teoría de Erikson, por su parte, nos ofrece el "software" psicosocial: las tareas emocionales, relacionales y de identidad que debemos resolver usando esas capacidades cognitivas para formar una personalidad sana.</p>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="equidadModal">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <h2 class="modal-title"><i class="fas fa-balance-scale"></i> Implicaciones y Aplicaciones</h2>
+      <div class="modal-text">
+        <p>Se puede observar una clara sincronía: el pensamiento concreto del niño (Piaget) le permite lograr su autonomía (Erikson);
+          el pensamiento abstracto del adolescente (Piaget) es la herramienta esencial para forjar su identidad (Erikson);
+          y la aplicación práctica del conocimiento en la adultez (Piaget) es el vehículo para alcanzar la generatividad y la integridad (Erikson).
+        Sigue  ↪ ️</p>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="vinculacionModal">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <h2 class="modal-title"><i class="fas fa-wrench"></i> Implicaciones y Aplicaciones (Continuación)</h2>
+      <div class="modal-text">
+        <p>En definitiva, una comprensión profunda del desarrollo humano requiere considerar ambas dimensiones.
+          No basta con saber cómo piensa un niño, un adolescente o un adulto;
+          es igualmente crucial entender qué siente, qué conflictos internos enfrenta y qué tareas psicosociales debe superar para avanzar hacia una vida plena.
+        La integración de Piaget y Erikson sigue siendo, hoy en día, la base más sólida para lograrlo.</p>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+// -- SCRIPT DE ANIMACIÓN DE PROPUESTAS --
+$(document).ready(function() {
+  const proposalsSection = $('#propuestas');
+  if (proposalsSection.length) {
+    const canvas = proposalsSection.find('canvas')[0];
+    const context = canvas.getContext('2d');
+    const setCanvasSize = () => {
+      canvas.width = proposalsSection.width();
+      canvas.height = proposalsSection.height();
+    };
+    setCanvasSize();
+    let Projectile;
+    let State = false;
+    let Explode = false;
+    let Collapse = false;
+    let Particles = [];
+    const colors = ["#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#f1c40f", "#e67e22", "#e74c3c"];
+    const explosionSound = document.getElementById('explosionSound');
+    function Proj() {
+      this.radius = 5.2;
+      this.x = Math.random() * canvas.width;
+      this.y = canvas.height + this.radius;
+      this.color = "#e74c3c";
+      this.velocity = {x: 0, y: 0};
+      this.speed = 12;
+    }
+    Proj.prototype = {
+      Update: function() {
+        const dx = canvas.width / 2 - this.x;
+        const dy = canvas.height / 2 - this.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance <= 10) {
+          Explode = true;
+          $('#propuestas .Nav').addClass('active');
+          if(explosionSound) explosionSound.play();
+        } else {
+          this.velocity.x = (dx / distance) * this.speed;
+          this.velocity.y = (dy / distance) * this.speed;
+          this.x += this.velocity.x;
+          this.y += this.velocity.y;
+        }
+      },
+      Draw: function() {
+        context.beginPath();
+        context.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+        context.fillStyle = this.color;
+        context.fill();
+        context.closePath();
+      }
+    };
+    function Particle() {
+      this.x = canvas.width / 2;
+      this.y = canvas.height / 2;
+      this.radius = 4;
+      this.color = colors[Math.floor(Math.random() * colors.length)];
+      this.velocity = { x: (Math.random() < 0.5 ? -1 : 1) * Math.random() * 10, y: (Math.random() < 0.5 ? -1 : 1) * Math.random() * 10 };
+      this.speed = 25;
+      this.active = true;
+    }
+    Particle.prototype = {
+      Update: function() {
+        if (Collapse) {
+          const dx = canvas.width / 2 - this.x;
+          const dy = canvas.height / 2 - this.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          this.velocity.x = (dx / distance) * this.speed;
+          this.velocity.y = (dy / distance) * this.speed;
+          this.x += this.velocity.x;
+          this.y += this.velocity.y;
+          if (distance <= 15) this.active = false;
+        } else {
+          this.x += this.velocity.x;
+          this.y += this.velocity.y;
+        }
+      },
+      Draw: function() {
+        context.beginPath();
+        context.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+        context.lineWidth = 2.2;
+        context.strokeStyle = this.color;
+        context.stroke();
+        context.closePath();
+      }
+    };
+    function Update() {
+      if (Particles.length < 100) {
+        for (let i = Particles.length; i < 100; i++) {
+          Particles.push(new Particle());
+        }
+      }
+      if (Explode || Collapse) {
+        Particles.forEach(p => p.Update());
+      }
+      Particles = Particles.filter(p => p.active);
+      if (State && !Explode) {
+        Projectile.Update();
+      }
+      Render();
+      requestAnimationFrame(Update);
+    }
+    function Render() {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      if (Explode || Collapse) {
+        Particles.forEach(p => p.Draw());
+      }
+      if (State && !Explode) {
+        Projectile.Draw();
+      }
+    }
+    $('#propuestas #Button').click(function(e) {
+      e.stopPropagation();
+      State = !State;
+      proposalsSection.toggleClass('menu-deployed');
+      if (Explode && !State) {
+        Collapse = true;
+      } else {
+        Collapse = false;
+        Particles = [];
+      }
+      if (State) {
+        Projectile = new Proj();
+      } else {
+        Projectile = null;
+        Explode = false;
+        $('#propuestas .Nav').removeClass('active');
+      }
+      $(this).toggleClass('fa-fire fa-times');
+    });
+    $('#propuestas .Nav a[data-modal]').on('click', function(e) {
+      e.preventDefault();
+      const modalId = $(this).data('modal') + 'Modal';
+      $('#' + modalId).addClass('active');
+    });
+    $(window).resize(setCanvasSize);
+    Update();
+  }
+});
+// -- SCRIPT DE FUNCIONALIDADES GENERALES Y COMENTARIOS --
+document.addEventListener('DOMContentLoaded', () => {
+// Menu Hamburguesa
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('navMenu');
+if (hamburger) {
+  hamburger.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    hamburger.innerHTML = navMenu.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+  });
+}
+// Cerrar menú al hacer clic en un enlace
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', () => {
+    if(navMenu.classList.contains('active')) {
+      navMenu.classList.remove('active');
+      hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+    }
+  });
+});
+// Acordeón
+const accordionItems = document.querySelectorAll('.accordion-item');
+accordionItems.forEach(item => {
+  const header = item.querySelector('.accordion-header');
+  header.addEventListener('click', () => {
+    const currentlyActive = document.querySelector('.accordion-item.active');
+    if (currentlyActive && currentlyActive !== item) {
+      currentlyActive.classList.remove('active');
+    }
+    item.classList.toggle('active');
+  });
+});
+// Lógica de Modales (unificada)
+const modalOpenTriggers = document.querySelectorAll('[data-modal], #openPortadaModal');
+const modalCloseButtons = document.querySelectorAll('.modal-close');
+const modals = document.querySelectorAll('.modal');
+
+modalOpenTriggers.forEach(trigger => {
+  trigger.addEventListener('click', (e) => {
+    e.preventDefault();
+    let modalId;
+    if (trigger.id === 'openPortadaModal') {
+      modalId = 'portadaModal';
+    } else {
+      modalId = trigger.getAttribute('data-modal') + 'Modal';
+    }
+    const modal = document.getElementById(modalId);
+    if (modal) modal.classList.add('active');
+  });
+});
+
+modalCloseButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    button.closest('.modal').classList.remove('active');
+  });
+});
+
+modals.forEach(modal => {
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.classList.remove('active');
+    }
+  });
+});
+
+// Lógica para girar tarjetas de instituciones
+const flipTriggers = document.querySelectorAll('.institution-card .card-link');
+const flipBackTriggers = document.querySelectorAll('.institution-card .btn-back');
+flipTriggers.forEach(trigger => {
+  trigger.addEventListener('click', (e) => {
+    e.preventDefault();
+    trigger.closest('.institution-card').classList.add('is-flipped');
+  });
+});
+flipBackTriggers.forEach(trigger => {
+  trigger.addEventListener('click', () => {
+    trigger.closest('.institution-card').classList.remove('is-flipped');
+  });
+});
+// Smooth scroll para enlaces de navegación
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const targetId = this.getAttribute('href');
+if(targetId === '#' || targetId.startsWith('#!')) return; // Ignorar enlaces vacíos
+e.preventDefault();
+const targetElement = document.querySelector(targetId);
+if (targetElement) {
+  window.scrollTo({
+top: targetElement.offsetTop - 70, // Ajuste por el header fijo
+behavior: 'smooth'
+});
+}
+});
+});
+// LÓGICA PARA LA SECCIÓN DE COMENTARIOS
+const commentForm = document.getElementById('commentForm');
+const commentInput = document.getElementById('commentInput');
+const commentsDisplay = document.getElementById('commentsDisplay');
+const commentsStorageKey = 'interactiveMuralComments';
+const loadComments = () => {
+  const savedComments = JSON.parse(localStorage.getItem(commentsStorageKey)) || [];
+  commentsDisplay.innerHTML = '';
+  savedComments.forEach(commentText => {
+    const commentElement = document.createElement('div');
+    commentElement.classList.add('comment-item');
+    commentElement.textContent = commentText;
+    commentsDisplay.appendChild(commentElement);
+  });
+};
+const saveComment = (commentText) => {
+  const savedComments = JSON.parse(localStorage.getItem(commentsStorageKey)) || [];
+  savedComments.push(commentText);
+  localStorage.setItem(commentsStorageKey, JSON.stringify(savedComments));
+};
+if (commentForm) {
+  commentForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const newComment = commentInput.value.trim();
+    if (newComment) {
+      saveComment(newComment);
+      loadComments();
+      commentInput.value = '';
+    }
+  });
+  loadComments();
+}
+// Lógica para reformas: toggle details
+document.querySelectorAll('.reform-card').forEach(card => {
+  card.addEventListener('click', () => {
+    card.classList.toggle('active');
+  });
+});
+// Slider automático en hero
+const slider = document.getElementById('slider');
+const dots = document.querySelectorAll('.dot');
+let currentSlide = 0;
+const slideCount = 3;
+function showSlide(index) {
+  if (slider) {
+    slider.style.transform = `translateX(-${index * (100 / slideCount)}%)`;
+    dots.forEach(dot => dot.classList.remove('active'));
+    if (dots[index]) {
+      dots[index].classList.add('active');
+    }
+  }
+}
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % slideCount;
+  showSlide(currentSlide);
+}
+dots.forEach((dot, index) => {
+  dot.addEventListener('click', () => {
+    currentSlide = index;
+    showSlide(currentSlide);
+  });
+});
+setInterval(nextSlide, 5000);
+// -- LÓGICA PARA LA LÍNEA DE TIEMPO --
+const timelineSlider = document.querySelector('.timeline-slider');
+const prevTimelineButton = document.querySelector('#linea-tiempo .timeline-nav.prev');
+const nextTimelineButton = document.querySelector('#linea-tiempo .timeline-nav.next');
+if (timelineSlider && prevTimelineButton && nextTimelineButton) {
+  const scrollAmount = () => {
+    return timelineSlider.querySelector('.timeline-item').offsetWidth;
+  };
+  nextTimelineButton.addEventListener('click', () => {
+    timelineSlider.scrollLeft += scrollAmount();
+  });
+  prevTimelineButton.addEventListener('click', () => {
+    timelineSlider.scrollLeft -= scrollAmount();
+  });
+}
+
+// == INICIO DE SCRIPT CORREGIDO Y OPTIMIZADO PARA SLIDER DE ERICKSON ==
+const eriksonSlider = document.querySelector('.erikson-slider');
+if (eriksonSlider) {
+  const eriksonStages = Array.from(eriksonSlider.querySelectorAll('.erikson-stage'));
+  const eriksonPrev = document.querySelector('.erikson-nav.prev');
+  const eriksonNext = document.querySelector('.erikson-nav.next');
+  let currentIndex = 0;
+  let isScrolling;
+
+// Función para actualizar la tarjeta activa (la que tiene el zoom)
+function updateActiveStage() {
+  const sliderCenter = eriksonSlider.getBoundingClientRect().left + eriksonSlider.offsetWidth / 2;
+  let closestIndex = -1;
+  let smallestDistance = Infinity;
+
+  eriksonStages.forEach((stage, index) => {
+    const stageCenter = stage.getBoundingClientRect().left + stage.offsetWidth / 2;
+    const distance = Math.abs(sliderCenter - stageCenter);
+
+    if (distance < smallestDistance) {
+      smallestDistance = distance;
+      closestIndex = index;
+    }
+  });
+
+  if (closestIndex !== -1) {
+    currentIndex = closestIndex;
+    eriksonStages.forEach((stage, index) => {
+      stage.classList.toggle('active', index === closestIndex);
+    });
+  }
+}
+
+// Función para centrar una tarjeta específica
+function centerStage(index, behavior = 'smooth') {
+  const stage = eriksonStages[index];
+  if (stage) {
+    const newScrollLeft = stage.offsetLeft - (eriksonSlider.offsetWidth / 2) + (stage.offsetWidth / 2);
+    eriksonSlider.scrollTo({
+      left: newScrollLeft,
+      behavior: behavior
+    });
+  }
+}
+
+// Evento de scroll con temporizador para evitar cálculos excesivos
+eriksonSlider.addEventListener('scroll', () => {
+  window.clearTimeout(isScrolling);
+  isScrolling = setTimeout(() => {
+    updateActiveStage();
+}, 150); // Un pequeño retardo para ejecutar después de que el usuario deja de hacer scroll
+});
+
+// Navegación con botones
+eriksonNext.addEventListener('click', () => {
+  let nextIndex = (currentIndex + 1) % eriksonStages.length;
+  centerStage(nextIndex);
+});
+
+eriksonPrev.addEventListener('click', () => {
+  let prevIndex = (currentIndex - 1 + eriksonStages.length) % eriksonStages.length;
+  centerStage(prevIndex);
+});
+
+// Estado inicial: activar la primera tarjeta al cargar la página
+// Usamos un pequeño Timeout para asegurar que todo esté renderizado
+setTimeout(() => {
+  updateActiveStage();
+}, 100);
+}
+// == FIN DE SCRIPT CORREGIDO Y OPTIMIZADO ==
+});
+</script>
+</body>
+</html>
